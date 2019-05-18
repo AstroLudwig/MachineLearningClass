@@ -1,40 +1,7 @@
-
-
-```python
-import * from pandas
-```
-
-
-      File "<ipython-input-14-eb3b95dad526>", line 1
-        import * from pandas
-               ^
-    SyntaxError: invalid syntax
-    
-
-
-
-```python
-from 'plotly.js/dist/plotly' import * as Plotlyjs
-```
-
-
-      File "<ipython-input-15-364d4b1cf7d8>", line 1
-        from 'plotly.js/dist/plotly' import * as Plotlyjs
-                                   ^
-    SyntaxError: invalid syntax
-    
-
-
-
 ```python
 import pandas as pd 
 import numpy as np 
 import matplotlib.pyplot as plt 
-import mpl_toolkits.mplot3d.axes3d as p3
-import plotly
-import plotly.plotly as py 
-import plotly.graph_objs as go
-import seaborn as sns
 from sklearn.model_selection import KFold
 from sklearn.cluster import KMeans
 from sklearn.cluster import AgglomerativeClustering
@@ -43,29 +10,8 @@ import random
 from random import randint 
 from sklearn.datasets import make_blobs, make_swiss_roll
 from astroML.datasets import fetch_dr7_quasar
-plotly.offline.init_notebook_mode(connected=True)
 plt.style.use("seaborn-bright")
 ```
-
-
-        <script type="text/javascript">
-        window.PlotlyConfig = {MathJaxConfig: 'local'};
-        if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
-        if (typeof require !== 'undefined') {
-        require.undef("plotly");
-        requirejs.config({
-            paths: {
-                'plotly': ['https://cdn.plot.ly/plotly-latest.min']
-            }
-        });
-        require(['plotly'], function(Plotly) {
-            window._Plotly = Plotly;
-        });
-        }
-        </script>
-        
-
-
 Due by 2 PM on Monday May 13th
 
 Python modules you'll want to use:
@@ -76,9 +22,6 @@ from sklearn.neighbors import kneighbors_graph
  - Use the same two data sets with at least two features from last week:
     - One that has elongated clusters or irregular shapes in the distribution. It should be easy to find a real astrophysical data set like this.
     - One that is convex and isotropic with blobs of approximately equal numbers of points. You'll probably have to make this yourself.
-
-
-
 
 ```python
 # Real Data
@@ -124,8 +67,6 @@ plt.savefig("Data.png")
 
 
  - Run the `AgglomerativeClustering` module on each data set with each of the different linkage criteria. Plot the data sets color coded by the cluster labels.
-
-
 
 
 ```python
