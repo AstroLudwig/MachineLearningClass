@@ -97,19 +97,13 @@ plt.show()
 
  - Describe in a few sentences the differences in the cluster labels based on what you know about the linkage criteria.
  
- For clean, simple data, the linkage criteria doesn't matter too much for identifying clusters. Although, "complete" and "ward" still do better than "average" here just by observing the two points above the left most cluster. For real data, this is no longer true and "ward" by far outperforms "average" and "complete"
+ For clean, simple data, the linkage criteria doesn't matter too much for identifying clusters. Although, "complete" and "ward" still do better than "average" here just by observing the two points above the left most cluster. For real data, this is no longer true and "ward" by far outperforms "average" and "complete." This makes sense since average looks for the average of all pairwise distances and since the data is skewed with one cluster being far more dense than the other, it won't choose a good boundary for where each cluster starts and ends. Complete looks for the distance between the farthest points in the cluster and so enforces that the data be circular, which isn't our case. Ward looks for the distance which minimizes the variance within the cluster and maximizes the distance, outside of the cluster. So in our case, it can correctly identify the denser cluster as being its own thing. 
 
  - Make a `structured` dataset. It is fun to use some subset of either the S curve or Swiss roll datasets here: https://scikit-learn.org/stable/datasets/index.html#generators-for-manifold-learning
-
-
 
 ```python
 SwissX, _ = make_swiss_roll(n_samples=1500,noise=0.05)
 SwissX[:,1] *= .5
-```
-
-
-```python
 fig = plt.figure()
 ax = p3.Axes3D(fig)
 ax.scatter(SwissX[:,0],SwissX[:,1],SwissX[:,2])
@@ -154,14 +148,6 @@ for i in range(1,4):
     ax.set_title(linkage[i-1])
 fig.suptitle("Neighbors = 10")
 ```
-
-
-
-
-    Text(0.5, 0.98, 'Neighbors = 10')
-
-
-
 
 ![png](output_16_1.png)
 
