@@ -24,7 +24,6 @@ from sklearn.metrics.cluster import contingency_matrix
 from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import average_precision_score
-import cmocean
 import time 
 ```
 
@@ -68,10 +67,9 @@ iris["target_names"]
 
 
 ```python
-f, axes = plt.subplots(2,2,figsize=(6,6))
+f, axes = plt.subplots(2,2,figsize=(5,5))
 plt.style.use("fivethirtyeight")
 cmap="rainbow"; fs =12
-#labels = iris["target_names"][iris["target"]]
 labels = iris["target_names"]
 # Sepal Width 1 vs Sepal Length 0
 axes[0,0].scatter(iris["data"][:,0],iris["data"][:,2],c=iris["target"],cmap=cmap,label=labels)
@@ -88,9 +86,8 @@ axes[1,0].set_ylabel(iris["feature_names"][2][:12],fontsize=fs)
 # Petal Length 2 vs Sepal - Petal Width 1 - 3
 axes[1,1].scatter(iris["data"][:,1]-iris["data"][:,3],iris["data"][:,2],c=iris["target"],cmap=cmap,label=labels)
 axes[1,1].set_xlabel(iris["feature_names"][1][:6]+" - "+iris["feature_names"][3][:12],fontsize=fs)
-#axes[1,1].set_ylabel(iris["feature_names"][2][:12],fontsize=fs)
 
-#plt.legend(loc='best', shadow=False, scatterpoints=1)
+f.patch.set_facecolor('white')
 plt.tight_layout()
 ```
 
@@ -118,35 +115,19 @@ comp = pca.components_
 
 
 ```python
-comp[0,1]
+fig = plt.figure(1, figsize=(5, 5))
+fig.patch.set_facecolor('white')
+ax = fig.add_subplot(111)
+ax.scatter(X_reduced[:, 0], X_reduced[:, 1], c=iris["target"],cmap=cmap)
+[ax.arrow(0, 0, comp[0,i], comp[1,i],color = '#6a79f7',alpha = 0.5, width = .05) for i in np.arange(4)]
+[ax.text(comp[0,i]* 1.5, comp[1,i] * 1.5, "Var"+str(i+1), color = '#8f99fb', ha = 'center', va = 'center',fontsize=10) for i in np.arange(4)]
+ax.set_xlabel("1st eigenvector")
+ax.set_ylabel("2nd eigenvector")
+ax.set_facecolor('white')
 ```
 
 
-
-
-    -0.08452251406456868
-
-
-
-
-```python
-fig = plt.figure(1, figsize=(6, 6))
-plt.scatter(X_reduced[:, 0], X_reduced[:, 1], c=iris["target"],cmap=cmap)
-[plt.arrow(0, 0, comp[0,i], comp[1,i],color = '#6a79f7',alpha = 0.5, width = .05) for i in np.arange(4)]
-[plt.text(comp[0,i]* 1.5, comp[1,i] * 1.5, "Var"+str(i+1), color = '#8f99fb', ha = 'center', va = 'center',fontsize=10) for i in np.arange(4)]
-plt.xlabel("1st eigenvector")
-plt.ylabel("2nd eigenvector")
-```
-
-
-
-
-    Text(0, 0.5, '2nd eigenvector')
-
-
-
-
-![png](output_14_1.png)
+![png](output_13_0.png)
 
 
 ### How much of the variance in the data is captured in the first two PCA directions?
@@ -259,7 +240,7 @@ confusionPlot(y_test,y_predict)
     
 
 
-![png](output_21_1.png)
+![png](output_20_1.png)
 
 
 #### The first two PCA Directions
@@ -308,7 +289,7 @@ confusionPlot(y_test,y_predict)
     
 
 
-![png](output_23_1.png)
+![png](output_22_1.png)
 
 
 ### Was dimensionality reduction a useful algorithm in the case of the data set you picked?  
